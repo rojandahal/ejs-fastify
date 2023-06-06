@@ -20,7 +20,7 @@ const getTask = async (req, reply) => {
     reply.code(200).send({ msg: 'No task found' });
     return;
   }
-  reply.code(200).send({ task });
+  await reply.view('/home.ejs', { tab: 'Tasks', task });
 };
 
 module.exports = {
