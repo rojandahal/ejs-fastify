@@ -12,4 +12,8 @@ module.exports = async function (fastify, opts) {
     },
     handler: loginUser,
   });
+
+  fastify.get('/', async function (req, reply) {
+    await reply.view('/login.ejs', { tab: 'Login', message: '' });
+  });
 };

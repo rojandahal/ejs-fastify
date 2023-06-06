@@ -20,10 +20,14 @@ const setUser = async (req, reply) => {
     //   path: '/api/v1',
     //   expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // Expires in 24 hours
     // });
-    reply.code(200).send(row);
+    await reply.view('/index.ejs', {
+      tab: 'Home',
+      title: 'Task Application',
+    });
   } catch (error) {
-    console.error(error);
-    throw new Error(error.errors[0].message);
+    await reply.view('/signup.ejs', {
+      tab: 'Signup',
+    });
   }
 };
 

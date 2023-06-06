@@ -1,5 +1,10 @@
 'use strict';
 module.exports = async function (fastify, opts) {
+  fastify.get('/', async function (req, reply) {
+    // reply.send({ hello: 'world' });
+    await reply.view('/index.ejs', { tab: 'Home', title: 'Task Application' });
+  });
+
   fastify.get('/login/google/callback', function (req, reply) {
     fastify.googleOAuth2.getAccessTokenFromAuthorizationCodeFlow(
       req,

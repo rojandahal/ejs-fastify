@@ -16,7 +16,6 @@ const loginUser = async (req, reply) => {
         //   id: row.id,
         //   username: row.username,
         // });
-        console.log('Login Successful');
         req.session.user = row.id;
         // Set the token as a cookie
         // reply.setCookie('token', token, {
@@ -26,15 +25,18 @@ const loginUser = async (req, reply) => {
           userInfo: req.session.user,
         });
         req.session.csrfToken = token;
-        reply.code(200).send({
-          'Login Successful': req.session.user,
-          SessionId: req.session,
-        });
+        await reply.view('/home.ejs', { tab: 'Home' });
       } else {
-        reply.code(401).send('Invalid username of password');
+        await reply.view('/login.ejs', {
+          tab: 'Login',
+          message: 'Invalid email or password',
+        });
       }
     } else {
-      reply.code(404).send('User Not found');
+      await reply.view('/login.ejs', {
+        tab: 'Login',
+        message: 'User not found',
+      });
     }
   } catch (error) {
     console.error(error);
