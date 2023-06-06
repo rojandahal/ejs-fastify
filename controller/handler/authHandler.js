@@ -25,7 +25,7 @@ const loginUser = async (req, reply) => {
           userInfo: req.session.user,
         });
         req.session.csrfToken = token;
-        await reply.view('/home.ejs', { tab: 'Home' });
+        reply.rediredt('/api/v1/tasks', { tab: 'Task' });
       } else {
         await reply.view('/login.ejs', {
           tab: 'Login',
