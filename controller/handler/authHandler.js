@@ -51,7 +51,6 @@ const logoutUser = async (req, reply) => {
     // Clear the token and session cookie
     await req.session.destroy();
     reply.clearCookie('sessionId');
-    reply.redirect('/api/v1/');
     return;
   } catch (error) {
     console.error('Error deleting session:', error);

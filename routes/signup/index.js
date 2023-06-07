@@ -25,8 +25,6 @@ module.exports = async function (fastify, opts) {
       const userModel = req.server.user;
       const { otp } = req.body;
       const row = await userModel.findOne({ where: { id: userId } });
-      console.log('\n\n\n\n\n\n\n\n' + otp);
-      console.log(row);
       if (row) {
         if (row.otp === otp) {
           console.log('verification Completed');

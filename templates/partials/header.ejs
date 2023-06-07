@@ -11,17 +11,102 @@
     </a>
     <% if (loggedIn) { %>
     <div class="d-flex">
-      <a href="/api/v1/tasks" class="btn btn-outline-dark me-2">Create Task</a>
-      <a onsubmit="handleLogout()" class="btn btn-outline-dark">Logout</a>
+      <button onclick="openPopup()" class="btn btn-outline-dark me-2">
+        Create Task
+      </button>
+      <button
+        type="submit"
+        onclick="handleSubmit()"
+        class="btn btn-outline-dark"
+        id="logoutButton"
+      >
+        Logout
+      </button>
     </div>
     <% } %>
   </div>
 </nav>
 
+<div class="modal" tabindex="-1" id="popup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create Task</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          onclick="closePopup()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form class="task-form" action="/api/v1/tasks" method="post">
+          <div class="mb-3">
+            <label for="taskName" class="form-label">Task Name</label>
+            <input
+              type="text"
+              name="title"
+              id="taskName"
+              class="form-control"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="taskDescription" class="form-label"
+              >Task Description</label
+            >
+            <textarea
+              name="description"
+              id="taskDescription"
+              class="form-control"
+              required
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="taskStatus" class="form-label">Task Status</label>
+            <select name="status" id="taskStatus" class="form-control" required>
+              <option value="backlog">Backlog</option>
+              <option value="todo">Todo</option>
+              <option value="pending">Pending</option>
+              <option value="done">Done</option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button
+              onclick="closePopup()"
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-  function handleLogout() {
+  function handleSubmit() {
     fetch('/api/v1/logout', {
       method: 'POST',
+    }).then((res) => {
+      window.location.href = '/api/v1';
     });
+  }
+
+  function openPopup() {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'block';
+    document.body.classList.add('popup-open');
+  }
+
+  function closePopup() {
+    const popup = document.getElementById('popup');
+    popup.style.display = 'none';
+    document.body.classList.remove('popup-open');
   }
 </script>
