@@ -23,10 +23,13 @@ const setUser = async (req, reply) => {
     await reply.view('/index.ejs', {
       tab: 'Home',
       title: 'Task Application',
+      loggedIn: true,
     });
   } catch (error) {
     await reply.view('/signup.ejs', {
       tab: 'Signup',
+      loggedIn: false,
+      message: error.errors[0].message,
     });
   }
 };

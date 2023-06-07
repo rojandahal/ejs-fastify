@@ -25,7 +25,7 @@ const loginUser = async (req, reply) => {
           userInfo: req.session.user,
         });
         req.session.csrfToken = token;
-        reply.rediredt('/api/v1/tasks', { tab: 'Task' });
+        reply.redirect('/api/v1/tasks');
       } else {
         await reply.view('/login.ejs', {
           tab: 'Login',
@@ -50,7 +50,8 @@ const logoutUser = async (req, reply) => {
   try {
     // Clear the token and session cookie
     await req.session.destroy();
-    reply.code(200).send({ 'Logout Successful': 'Logged out' });
+    reply.clearCookie('sessionId');
+    reply.redirect('/api/v1/');
     return;
   } catch (error) {
     console.error('Error deleting session:', error);

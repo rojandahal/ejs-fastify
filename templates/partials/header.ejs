@@ -9,5 +9,19 @@
         class="d-inline-block align-text-top ms-2"
       />
     </a>
+    <% if (loggedIn) { %>
+    <div class="d-flex">
+      <a href="/api/v1/tasks" class="btn btn-outline-dark me-2">Create Task</a>
+      <a onsubmit="handleLogout()" class="btn btn-outline-dark">Logout</a>
+    </div>
+    <% } %>
   </div>
 </nav>
+
+<script>
+  function handleLogout() {
+    fetch('/api/v1/logout', {
+      method: 'POST',
+    });
+  }
+</script>

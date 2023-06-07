@@ -13,7 +13,10 @@ module.exports = async function (fastify, opts) {
   fastify.get('/', {
     onRequest: fastify.isLoggedIn,
     handler: async function (req, reply) {
-      await reply.view('/login.ejs', { tab: 'Login', message: '' });
+      await reply.view('/login.ejs', {
+        tab: 'Login',
+        message: '',
+      });
     },
   });
 };

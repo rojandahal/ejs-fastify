@@ -14,10 +14,17 @@ const updateTasks = async (req, reply) => {
 
 const getTask = async (req, reply) => {
   const userId = req.session.user;
+  if (!userId) {
+    reply.redirect('/api/v1');
+    return;
+  }
 
-  const task = await req.server.task.findAll({ where: { user: userId } });
+  const task = await req.server.task.findAll();
   if (task.length === 0) {
-    await reply.view('/tasks.ejs', { tab: 'Tasks', tasks: 'No Tasks' });
+    await reply.view('/tasks.ejs', {
+      tab: 'Tasks',
+      tasks: 'No Tasks',
+    });
     return;
   }
 
