@@ -1,0 +1,35 @@
+<div class="form_register">
+  <form
+    class="w-50 g-3 needs-validation"
+    novalidate=""
+    action="/api/v1/signup/verifyotp"
+    method="post"
+  >
+    <div class="mb-3">
+      <label for="inputOtp" class="form-label">OTP sent to your email</label>
+      <input
+        type="text"
+        name="otp"
+        class="form-control w-75"
+        id="inputOtp"
+        minlength="6"
+        required
+      />
+      <div class="invalid-feedback">OTP consists of 6 digits.</div>
+    </div>
+    <button type="submit" class="btn btn-dark">Submit</button>
+    <p class="text-danger fw-semibold"><%= message %></p>
+  </form>
+</div>
+
+<script>
+  document
+    .querySelector('.form_register form')
+    .addEventListener('submit', function (event) {
+      if (!event.target.checkValidity()) {
+        event.preventDefault(); // Prevent form submission if it's invalid
+        event.stopPropagation();
+      }
+      event.target.classList.add('was-validated');
+    });
+</script>

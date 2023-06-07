@@ -6,14 +6,17 @@ const { loginUser } = require('../../controller/handler/authHandler');
 
 module.exports = async function (fastify, opts) {
   fastify.post('/', {
-    preValidation: fastify.isLoggedIn,
+    onRequest: fastify.isLoggedIn,
     handler: loginUser,
   });
 
   fastify.get('/', {
     onRequest: fastify.isLoggedIn,
     handler: async function (req, reply) {
-      await reply.view('/login.ejs', { tab: 'Login', message: '' });
+      await reply.view('/login.ejs', {
+        tab: 'Login',
+        message: '',
+      });
     },
   });
 };

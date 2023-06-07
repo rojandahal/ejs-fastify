@@ -12,20 +12,20 @@ const loginUser = async (req, reply) => {
     const row = await userModel.findOne({ where: { username: username } });
     if (row) {
       if (row.password === hashedPw) {
-        // const token = req.server.jwt.sign({
-        //   id: row.id,
-        //   username: row.username,
-        // });
+        req.session.forVerification = row.id;
+        if (row.verified === false) {
+          await reply.view('/verifyotp.ejs', {
+            tab: 'Verify OTP',
+            message: '',
+          });
+          return;
+        }
         req.session.user = row.id;
-        // Set the token as a cookie
-        // reply.setCookie('token', token, {
-        //   expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // Expires in 24 hours
-        // });
         const token = await reply.generateCsrf({
           userInfo: req.session.user,
         });
         req.session.csrfToken = token;
-        reply.rediredt('/api/v1/tasks', { tab: 'Task' });
+        reply.redirect('/api/v1/tasks');
       } else {
         await reply.view('/login.ejs', {
           tab: 'Login',
@@ -50,7 +50,7 @@ const logoutUser = async (req, reply) => {
   try {
     // Clear the token and session cookie
     await req.session.destroy();
-    reply.code(200).send({ 'Logout Successful': 'Logged out' });
+    reply.clearCookie('sessionId');
     return;
   } catch (error) {
     console.error('Error deleting session:', error);

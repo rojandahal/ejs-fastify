@@ -8,6 +8,7 @@ const {
 
 module.exports = async function (fastify, opts) {
   fastify.get('/', {
+		preValidation: fastify.isLoggedIn,
     handler: getTask,
   });
 

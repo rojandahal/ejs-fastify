@@ -7,14 +7,15 @@
       <hr class="solid" />
       <% tasks.forEach((task) => { %> <% if (task.dataValues.status ===
       'backlog') { %>
-      <div class="task-item">
-        <div>
-          <button
-            type="button"
-            class="btn btn-outline-light bg-dark w-100 text-white"
-          >
-            <%= task.dataValues.title %>
-          </button>
+      <div class="card text-bg-dark mt-2 shadow">
+        <div class="card-header border-light text-start">
+          <%= task.dataValues.title %>
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= task.dataValues.description %></p>
+        </div>
+        <div class="card-footer text-muted bg-light border-light text-end">
+          Rojan Dahal
         </div>
       </div>
       <% } %> <% }) %>
@@ -26,14 +27,15 @@
       <hr class="solid" />
       <% tasks.forEach((task) => { %> <% if (task.dataValues.status === 'todo')
       { %>
-      <div class="task-item">
-        <div>
-          <button
-            type="button"
-            class="btn btn-outline-light bg-dark w-100 text-white"
-          >
-            <%= task.dataValues.title %>
-          </button>
+      <div class="card text-bg-dark mt-2 shadow">
+        <div class="card-header border-light text-start">
+          <%= task.dataValues.title %>
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= task.dataValues.description %></p>
+        </div>
+        <div class="card-footer text-muted bg-light border-light text-end">
+          Rojan Dahal
         </div>
       </div>
       <% } %> <% }) %>
@@ -45,14 +47,15 @@
       <hr class="solid" />
       <% tasks.forEach((task) => { %> <% if (task.dataValues.status ===
       'pending') { %>
-      <div class="task-item">
-        <div>
-          <button
-            type="button"
-            class="btn btn-outline-light bg-dark w-100 text-white"
-          >
-            <%= task.dataValues.title %>
-          </button>
+      <div class="card text-bg-dark mt-2 shadow">
+        <div class="card-header border-light text-start">
+          <%= task.dataValues.title %>
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= task.dataValues.description %></p>
+        </div>
+        <div class="card-footer text-muted bg-light border-light text-end">
+          Rojan Dahal
         </div>
       </div>
       <% } %> <% }) %>
@@ -65,14 +68,15 @@
 
       <% tasks.forEach((task) => { %> <% if (task.dataValues.status === 'done')
       { %>
-      <div class="task-item">
-        <div>
-          <button
-            type="button"
-            class="btn btn-outline-light bg-dark w-100 text-white mt-2"
-          >
-            <%= task.dataValues.title %>
-          </button>
+      <div class="card text-bg-dark mt-2 shadow">
+        <div class="card-header border-light text-start">
+          <%= task.dataValues.title %>
+        </div>
+        <div class="card-body">
+          <p class="card-text"><%= task.dataValues.description %></p>
+        </div>
+        <div class="card-footer text-muted bg-light border-light text-end">
+          Rojan Dahal
         </div>
       </div>
       <% } %> <% }) %>

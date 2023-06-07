@@ -1,11 +1,11 @@
 'use strict';
 module.exports = async function (fastify, opts) {
   fastify.get('/', {
-    onRequest: fastify.isLoggedIn,
     handler: async function (req, reply) {
       await reply.view('/index.ejs', {
         tab: 'Home',
         title: 'Task Application',
+        loggedIn: req.session.user ? true : false,
       });
     },
   });

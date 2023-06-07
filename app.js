@@ -63,8 +63,10 @@ module.exports = async function (fastify, opts) {
     root: path.join(__dirname, 'public'),
     prefix: '/public/', // optional: default '/'
   });
+
   //Register formbody to parse x-www-form-urlencoded
   fastify.register(require('@fastify/formbody'));
+
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused
   // through your application
