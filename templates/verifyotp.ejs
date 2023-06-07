@@ -1,0 +1,45 @@
+<div class="form_register">
+  <form
+    class="w-50 g-3 needs-validation"
+    novalidate=""
+    action="/api/v1/login"
+    method="post"
+  >
+    <div class="mb-3">
+      <label for="inputOtp" class="form-label">OTP sent to your email</label>
+      <input
+        type="text"
+        name="otp"
+        class="form-control w-75"
+        id="inputOtp"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-dark">Submit</button>
+    <p class="text-danger fw-semibold"><%= message %></p>
+  </form>
+</div>
+
+<script>
+  const form = document.querySelector('.form_register');
+  const inputOtp = form.querySelector('#inputOtp');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const otp = inputOtp.value;
+
+    fetch('/api/v1/verifyotp', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: {
+        otp: otp,
+      },
+    })
+      .then((res) => {
+        window.location.href = '/api/v1/tasks';
+      })
+      .catch((err) => console.error(err));
+  });
+</script>

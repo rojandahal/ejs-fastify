@@ -21,7 +21,7 @@ const UserModel = (sequelize) => {
     },
     email: {
       type: DataTypes.STRING,
-			unique: true,
+      unique: true,
       // Enforce an email format
       validate: {
         isEmail: {
@@ -29,6 +29,14 @@ const UserModel = (sequelize) => {
           msg: 'Invalid email format.',
         },
       },
+    },
+    otp: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    verified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
     // Add more columns as needed
   });

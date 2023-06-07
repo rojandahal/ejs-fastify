@@ -12,15 +12,16 @@ const loginUser = async (req, reply) => {
     const row = await userModel.findOne({ where: { username: username } });
     if (row) {
       if (row.password === hashedPw) {
-        // const token = req.server.jwt.sign({
-        //   id: row.id,
-        //   username: row.username,
-        // });
         req.session.user = row.id;
-        // Set the token as a cookie
-        // reply.setCookie('token', token, {
-        //   expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // Expires in 24 hours
-        // });
+
+        if (row.verified === false) {
+          await reply.view('/verifyotp.ejs', {
+            tab: 'Verify OTP',
+            message: '',
+          });
+          return;
+        }
+
         const token = await reply.generateCsrf({
           userInfo: req.session.user,
         });

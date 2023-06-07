@@ -6,7 +6,7 @@ const { loginUser } = require('../../controller/handler/authHandler');
 
 module.exports = async function (fastify, opts) {
   fastify.post('/', {
-    preValidation: fastify.isLoggedIn,
+    onRequest: fastify.isLoggedIn,
     handler: loginUser,
   });
 
