@@ -12,8 +12,7 @@ const loginUser = async (req, reply) => {
     const row = await userModel.findOne({ where: { username: username } });
     if (row) {
       if (row.password === hashedPw) {
-        req.session.user = row.id;
-
+        req.session.forVerification = row.id;
         if (row.verified === false) {
           await reply.view('/verifyotp.ejs', {
             tab: 'Verify OTP',
@@ -21,7 +20,7 @@ const loginUser = async (req, reply) => {
           });
           return;
         }
-
+        req.session.user = row.id;
         const token = await reply.generateCsrf({
           userInfo: req.session.user,
         });
