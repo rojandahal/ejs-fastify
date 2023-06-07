@@ -8,18 +8,14 @@ const {
 
 module.exports = async function (fastify, opts) {
   fastify.get('/', {
-    onRequest: fastify.csrfProtection,
-    preValidation: fastify.authenticate,
     handler: getTask,
   });
 
   fastify.post('/', {
-    preValidation: fastify.authenticate,
     handler: setTasks,
   });
 
   fastify.put('/', {
-    preValidation: fastify.authenticate,
     handler: updateTasks,
   });
 };

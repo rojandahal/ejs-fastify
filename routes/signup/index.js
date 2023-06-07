@@ -8,7 +8,10 @@ module.exports = async function (fastify, opts) {
     handler: setUser,
   });
 
-  fastify.get('/', async function (req, reply) {
-    await reply.view('/signup.ejs', { tab: 'Signup' }); // Pass the message to the template
+  fastify.get('/', {
+    onRequest: fastify.isLoggedIn,
+    handler: async function (req, reply) {
+      await reply.view('/signup.ejs', { tab: 'Signup' }); // Pass the message to the template
+    },
   });
 };

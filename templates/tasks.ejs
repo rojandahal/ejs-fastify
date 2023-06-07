@@ -1,0 +1,81 @@
+<div class="container text-center">
+  <div class="row align-items-start">
+    <div
+      class="col bg-secondary text-white m-2 pb-5 border border-dark rounded"
+    >
+      <h3>Backlog task</h3>
+      <hr class="solid" />
+      <% tasks.forEach((task) => { %> <% if (task.dataValues.status ===
+      'backlog') { %>
+      <div class="task-item">
+        <div>
+          <button
+            type="button"
+            class="btn btn-outline-light bg-dark w-100 text-white"
+          >
+            <%= task.dataValues.title %>
+          </button>
+        </div>
+      </div>
+      <% } %> <% }) %>
+    </div>
+    <div
+      class="col bg-secondary text-white m-2 pb-5 border border-dark rounded"
+    >
+      <h3>Todo</h3>
+      <hr class="solid" />
+      <% tasks.forEach((task) => { %> <% if (task.dataValues.status === 'todo')
+      { %>
+      <div class="task-item">
+        <div>
+          <button
+            type="button"
+            class="btn btn-outline-light bg-dark w-100 text-white"
+          >
+            <%= task.dataValues.title %>
+          </button>
+        </div>
+      </div>
+      <% } %> <% }) %>
+    </div>
+    <div
+      class="col bg-secondary text-white m-2 pb-5 border border-dark rounded"
+    >
+      <h3>Pending</h3>
+      <hr class="solid" />
+      <% tasks.forEach((task) => { %> <% if (task.dataValues.status ===
+      'pending') { %>
+      <div class="task-item">
+        <div>
+          <button
+            type="button"
+            class="btn btn-outline-light bg-dark w-100 text-white"
+          >
+            <%= task.dataValues.title %>
+          </button>
+        </div>
+      </div>
+      <% } %> <% }) %>
+    </div>
+    <div
+      class="col bg-secondary text-white m-2 pb-5 border border-dark rounded"
+    >
+      <h3>Done</h3>
+      <hr class="solid" />
+
+      <% tasks.forEach((task) => { %> <% if (task.dataValues.status === 'done')
+      { %>
+      <div class="task-item">
+        <div>
+          <button
+            type="button"
+            class="btn btn-outline-light bg-dark w-100 text-white mt-2"
+          >
+            <%= task.dataValues.title %>
+          </button>
+        </div>
+      </div>
+      <% } %> <% }) %>
+    </div>
+  </div>
+</div>
