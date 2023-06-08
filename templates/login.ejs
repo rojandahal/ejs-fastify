@@ -1,55 +1,42 @@
 <div class="form_register">
-  <form
-    class="w-50 g-3 needs-validation"
-    novalidate=""
-    action="/api/v1/login"
-    method="post"
-  >
-    <h2 class="mb-4">Login</h2>
-    <div class="mb-3">
-      <label for="inputUsername" class="form-label">Username</label>
-      <input
-        type="text"
-        class="form-control w-75"
-        id="username"
-        name="username"
-        aria-describedby="emailHelp"
-        minlength="3"
-        required
-      />
-      <div class="invalid-feedback">
-        Please provide a username with at least 3 character.
-      </div>
-    </div>
-    <div class="mb-3">
-      <label for="inputPassword" class="form-label">Password</label>
-      <input
-        type="password"
-        name="password"
-        class="form-control w-75"
-        id="inputPassword"
-        minlength="8"
-        required
-      />
-      <div class="invalid-feedback">
-        Please provide a password with at least 8 character.
-      </div>
-    </div>
-    <button type="submit" class="btn btn-dark">Submit</button>
-    <p class="text-danger fw-semibold"><%= message %></p>
-  </form>
+	<form class="w-50 g-3 needs-validation" novalidate="" action="/api/v1/login" method="post">
+		<h2 class="mb-4">Login</h2>
+		<div class="mb-3">
+			<label for="inputUsername" class="form-label">Username</label>
+			<input type="text" class="form-control w-75" id="username" name="username" aria-describedby="emailHelp"
+				minlength="3" required />
+			<div class="invalid-feedback">
+				Please provide a username with at least 3 character.
+			</div>
+		</div>
+		<div class="mb-3">
+			<label for="inputPassword" class="form-label">Password</label>
+			<input type="password" name="password" class="form-control w-75" id="inputPassword" minlength="8" required />
+			<div class="invalid-feedback">
+				Please provide a password with at least 8 character.
+			</div>
+		</div>
+		<button type="submit" class="btn btn-dark">Submit</button>
+		<div>
+			<span>Do you want to register ?</span>
+			<a href="/api/v1/signup" class="text-success fw-bold text-decoration-underline">Signup</a>
+		</div>
+		<p class="text-danger fw-semibold">
+			<%= message %>
+		</p>
+	</form>
 </div>
 
 <script>
-  // Add event listener for form submission
-  document
-    .querySelector('.form_register form')
-    .addEventListener('submit', function (event) {
-      if (!event.target.checkValidity()) {
-        event.preventDefault(); // Prevent form submission if it's invalid
-        event.stopPropagation();
-      }
+	// Add event listener for form submission
+	document
+		.querySelector('.form_register form')
+		.addEventListener('submit', function (event) {
+			if (!event.target.checkValidity()) {
+				event.preventDefault(); // Prevent form submission if it's invalid
+				event.stopPropagation();
+			}
 
-      event.target.classList.add('was-validated');
-    });
+			event.target.classList.add('was-validated');
+		});
 </script>

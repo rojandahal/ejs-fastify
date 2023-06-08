@@ -32,6 +32,7 @@ const getTask = async (req, reply) => {
     t.dataValues.username = userId.dataValues.username;
     t.dataValues.user = userId.dataValues.id;
   });
+
   if (task.length === 0) {
     await reply.view('/tasks.ejs', {
       tab: 'Tasks',
@@ -46,7 +47,7 @@ const getTask = async (req, reply) => {
     tab: 'Tasks',
     tasks: task,
     message: '',
-    currentUser: req.session.user,
+    currentUser: userId,
   });
 };
 
