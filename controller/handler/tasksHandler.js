@@ -2,15 +2,21 @@
 
 const setTasks = async (req, reply) => {
   const taskDetails = req.body;
+  delete taskDetails.id;
   console.log(req.body);
   const userId = req.session.user;
   const user = { ...taskDetails, user: userId };
   const task = await req.server.task.create(user);
-  reply.redirect('/api/v1/tasks');
+  await reply.redirect('/api/v1/tasks');
 };
 
 const updateTasks = async (req, reply) => {
-  //Update Task
+  const taskDetails = req.body;
+  const user = { ...taskDetails };
+  const task = await req.server.task.update(user, {
+    where: { id: taskDetails.id },
+  });
+  reply.redirect('/api/v1/tasks');
 };
 
 const getTask = async (req, reply) => {
@@ -21,6 +27,11 @@ const getTask = async (req, reply) => {
   }
 
   const task = await req.server.task.findAll();
+  await task.map(async (t) => {
+    const userId = await req.server.user.findOne({ where: { id: t.user } });
+    t.dataValues.username = userId.dataValues.username;
+    t.dataValues.user = userId.dataValues.id;
+  });
   if (task.length === 0) {
     await reply.view('/tasks.ejs', {
       tab: 'Tasks',
@@ -31,11 +42,23 @@ const getTask = async (req, reply) => {
   }
 
   // task.map((task) => console.log(task.dataValues));
-  await reply.view('/tasks.ejs', { tab: 'Tasks', tasks: task, message: '' });
+  await reply.view('/tasks.ejs', {
+    tab: 'Tasks',
+    tasks: task,
+    message: '',
+    currentUser: req.session.user,
+  });
+};
+
+const deleteTask = async (req, reply) => {
+  const { id } = req.params;
+  const task = await req.server.task.destroy({ where: { id } });
+  reply.redirect('/api/v1/tasks');
 };
 
 module.exports = {
   setTasks,
   updateTasks,
   getTask,
+  deleteTask,
 };
