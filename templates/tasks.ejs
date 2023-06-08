@@ -1,85 +1,136 @@
 <div class="container text-center">
-  <div class="row align-items-start">
-    <div
-      class="col bg-secondary text-white m-2 pb-5 border border-dark rounded"
-    >
-      <h3>Backlog task</h3>
-      <hr class="solid" />
-      <% tasks.forEach((task) => { %> <% if (task.dataValues.status ===
-      'backlog') { %>
-      <div class="card text-bg-dark mt-2 shadow">
-        <div class="card-header border-light text-start">
-          <%= task.dataValues.title %>
-        </div>
-        <div class="card-body">
-          <p class="card-text"><%= task.dataValues.description %></p>
-        </div>
-        <div class="card-footer text-muted bg-light border-light text-end">
-          Rojan Dahal
-        </div>
-      </div>
-      <% } %> <% }) %>
-    </div>
-    <div
-      class="col bg-secondary text-white m-2 pb-5 border border-dark rounded"
-    >
-      <h3>Todo</h3>
-      <hr class="solid" />
-      <% tasks.forEach((task) => { %> <% if (task.dataValues.status === 'todo')
-      { %>
-      <div class="card text-bg-dark mt-2 shadow">
-        <div class="card-header border-light text-start">
-          <%= task.dataValues.title %>
-        </div>
-        <div class="card-body">
-          <p class="card-text"><%= task.dataValues.description %></p>
-        </div>
-        <div class="card-footer text-muted bg-light border-light text-end">
-          Rojan Dahal
-        </div>
-      </div>
-      <% } %> <% }) %>
-    </div>
-    <div
-      class="col bg-secondary text-white m-2 pb-5 border border-dark rounded"
-    >
-      <h3>Pending</h3>
-      <hr class="solid" />
-      <% tasks.forEach((task) => { %> <% if (task.dataValues.status ===
-      'pending') { %>
-      <div class="card text-bg-dark mt-2 shadow">
-        <div class="card-header border-light text-start">
-          <%= task.dataValues.title %>
-        </div>
-        <div class="card-body">
-          <p class="card-text"><%= task.dataValues.description %></p>
-        </div>
-        <div class="card-footer text-muted bg-light border-light text-end">
-          Rojan Dahal
-        </div>
-      </div>
-      <% } %> <% }) %>
-    </div>
-    <div
-      class="col bg-secondary text-white m-2 pb-5 border border-dark rounded"
-    >
-      <h3>Done</h3>
-      <hr class="solid" />
+	<div class="row align-items-start">
+		<div class="col bg-secondary text-white m-2 pb-5 border border-dark rounded">
+			<h3>Backlog task</h3>
+			<hr class="solid" />
+			<% tasks.forEach((task, index)=> { %> <% if (task.dataValues.status==='backlog' ) { %>
+					<% const {id,title, description, status,user}=task %>
+						<div class="card text-bg-dark mt-2 shadow"
+							onclick="openUpdatePopup('<%=JSON.stringify({id,title, description, status, currentUser, user})%>')">
+							<div class="card-header border-light text-start">
+								<%= task.dataValues.title %>
+							</div>
+							<div class="card-body">
+								<p class="card-text">
+									<%= task.dataValues.description %>
+								</p>
+							</div>
+							<div class="card-footer text-muted bg-light border-light text-end">
+								<%= task.dataValues.username %>
+							</div>
+						</div>
+						<% } %>
+							<% }) %>
+		</div>
+		<div class="col bg-secondary text-white m-2 pb-5 border border-dark rounded">
+			<h3>Todo</h3>
+			<hr class="solid" />
+			<% tasks.forEach((task, index)=> { %> <% if (task.dataValues.status==='todo' ) { %>
+					<% const {id, title, description, status, user}=task %>
+						<div class="card text-bg-dark mt-2 shadow"
+							onclick="openUpdatePopup('<%=JSON.stringify({id, title, description, status, currentUser, user})%>')">
+							<div class="card-header border-light text-start">
+								<%= task.dataValues.title %>
+							</div>
+							<div class="card-body">
+								<p class="card-text">
+									<%= task.dataValues.description %>
+								</p>
+							</div>
+							<div class="card-footer text-muted bg-light border-light text-end">
+								<%= task.dataValues.username %>
+							</div>
+						</div>
+						<% } %>
+							<% }) %>
+		</div>
+		<div class="col bg-secondary text-white m-2 pb-5 border border-dark rounded">
+			<h3>Pending</h3>
+			<hr class="solid" />
+			<% tasks.forEach((task, index)=> { %> <% if (task.dataValues.status==='pending' ) { %>
+					<% const {id, title, description, status, user}=task %>
+						<div class="card text-bg-dark mt-2 shadow"
+							onclick="openUpdatePopup('<%=JSON.stringify({id,title, description, status, currentUser, user})%>')">
+							<div class="card-header border-light text-start">
+								<%= task.dataValues.title %>
+							</div>
+							<div class="card-body">
+								<p class="card-text">
+									<%= task.dataValues.description %>
+								</p>
+							</div>
+							<div class="card-footer text-muted bg-light border-light text-end">
+								<%= task.dataValues.username %>
+							</div>
+						</div>
+						<% } %>
+							<% }) %>
+		</div>
+		<div class="col bg-secondary text-white m-2 pb-5 border border-dark rounded">
+			<h3>Done</h3>
+			<hr class="solid" />
 
-      <% tasks.forEach((task) => { %> <% if (task.dataValues.status === 'done')
-      { %>
-      <div class="card text-bg-dark mt-2 shadow">
-        <div class="card-header border-light text-start">
-          <%= task.dataValues.title %>
-        </div>
-        <div class="card-body">
-          <p class="card-text"><%= task.dataValues.description %></p>
-        </div>
-        <div class="card-footer text-muted bg-light border-light text-end">
-          Rojan Dahal
-        </div>
-      </div>
-      <% } %> <% }) %>
-    </div>
-  </div>
+			<% tasks.forEach((task, index)=> { %> <% if (task.dataValues.status==='done' ) { %>
+					<% const {id,title, description, status, user}=task %>
+						<div class="card text-bg-dark mt-2 shadow"
+							onclick="openUpdatePopup('<%=JSON.stringify({id, title, description, status, currentUser, user})%>')">
+							<div class="card-header border-light text-start">
+								<%= task.dataValues.title %>
+							</div>
+							<div class="card-body">
+								<p class="card-text">
+									<%= task.dataValues.description %>
+								</p>
+							</div>
+							<div class="card-footer text-muted bg-light border-light text-end">
+								<%= task.dataValues.username %>
+							</div>
+						</div>
+						<% } %>
+							<% }) %>
+		</div>
+	</div>
 </div>
+
+<script>
+	function openUpdatePopup(task) {
+		const { id, title, description, status, currentUser, user } = JSON.parse(task);
+		const taskName = document.getElementById('taskName');
+		const taskDescription = document.getElementById('taskDescription');
+		const taskStatus = document.getElementById('taskStatus');
+		const modalTitle = document.getElementById('task-form-title');
+		const buttonText = document.getElementById('submit-button');
+		const form = document.getElementById('form-submit');
+		const formID = document.getElementById('user-id')
+		const deleteBtn = document.getElementById('delete-btn');
+
+		if (id) {
+			modalTitle.innerText = 'Update Task';
+			buttonText.innerText = 'Update';
+			taskName.value = title;
+			taskDescription.value = description;
+			taskStatus.value = status;
+			formID.value = id;
+			form.action = '/api/v1/tasks/update';
+			form.method = 'post';
+			if (currentUser === user) {
+				deleteBtn.hidden = false;
+			}
+			const popup = document.getElementById('popup');
+			popup.style.display = 'block';
+			document.body.classList.add('popup-open');
+		}
+		deleteBtn.onclick = function () {
+			fetch(`/api/v1/tasks/${id}`, {
+				method: 'DELETE',
+			}).then((res) => {
+				window.location.href = '/api/v1/tasks';
+			});
+		};
+	}
+	function closePopup() {
+		const popup = document.getElementById('popup');
+		popup.style.display = 'none';
+		document.body.classList.remove('popup-open');
+	}
+</script>
