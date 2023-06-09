@@ -5,6 +5,7 @@ module.exports = async function (fastify, opts) {
       await reply.view('/index.ejs', {
         tab: 'Home',
         title: 'Task Manager',
+        username: req.session.user ? req.session.username : '',
         loggedIn: req.session.user ? true : false,
       });
     },
