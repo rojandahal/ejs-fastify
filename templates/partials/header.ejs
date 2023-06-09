@@ -6,6 +6,9 @@
 		</a>
 		<% if (loggedIn) { %>
 			<div class="d-flex">
+				<span class="fw-bold me-3 mt-2">
+					<%= username %>
+				</span>
 				<button onclick="openPopup()" class="btn btn-outline-dark me-2">
 					Create Task
 				</button>
