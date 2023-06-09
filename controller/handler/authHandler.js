@@ -29,7 +29,7 @@ const loginUser = async (req, reply) => {
       } else {
         await reply.view('/login.ejs', {
           tab: 'Login',
-          message: 'Invalid email or password',
+          message: 'Invalid username or password',
         });
       }
     } else {

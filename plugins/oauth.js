@@ -95,13 +95,18 @@ const oauth = fastifyPlugin(async function (fastify, opts) {
           try {
             const [user, created] = await req.server.user.findOrCreate({
               where: {
-                username: data.id,
                 email: data.email,
               },
               defaults: {
-                username: data.id,
+                username: (
+                  data.given_name.toLowerCase() +
+                  data.family_name.toLowerCase() +
+                  Math.floor(Math.random() * 900 + 100)
+                ).toLowerCase(),
                 email: data.email,
                 password: hashedPw,
+                otp: 0,
+                verified: true,
               },
             });
             resolve(user.dataValues);
