@@ -3,6 +3,7 @@
 const path = require('path');
 const AutoLoad = require('@fastify/autoload');
 const cors = require('@fastify/cors');
+
 // Define the default options
 const defaultOptions = {
   fastify: {
@@ -40,6 +41,31 @@ module.exports = async function (fastify, opts) {
     exposedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
   });
+
+  const templatesFolder = 'templates';
+  const options = {
+    filename: path.resolve(templatesFolder),
+    views: [path.join(__dirname, 'templates')],
+  };
+  //Register ejs as template
+  fastify.register(require('@fastify/view'), {
+    engine: {
+      ejs: require('ejs'),
+    },
+    includeViewExtension: true,
+    templates: templatesFolder,
+    layout: 'layout.ejs',
+    options,
+  });
+
+  //Register static folder
+  fastify.register(require('@fastify/static'), {
+    root: path.join(__dirname, 'public'),
+    prefix: '/public/', // optional: default '/'
+  });
+
+  //Register formbody to parse x-www-form-urlencoded
+  fastify.register(require('@fastify/formbody'));
 
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused

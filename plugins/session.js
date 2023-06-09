@@ -5,8 +5,15 @@ const { Pool } = require('pg');
 
 const sessionConnect = async (fastify, opts) => {
   //Register session plugin
+  // const pool = new Pool({
+  //   connectionString: process.env.DB_CONNECTION_STRING, // Replace with your PostgreSQL connection details
+  // });
   const pool = new Pool({
-    connectionString: 'postgres://postgres:toti2king@localhost/postgres', // Replace with your PostgreSQL connection details
+    connectionString: process.env.DB_CONNECTION_STRING,
+		ssl: {
+			rejectUnauthorized: false,
+		},
+		
   });
 
   fastify.register(session, {
@@ -22,7 +29,8 @@ const sessionConnect = async (fastify, opts) => {
     store: new pgSession({
       pool,
       tableName: 'sessions', // Name of the session table in the database
-      createTableIfMissing: false, // Disable table creation if missing
+      createTableIfMissing: true, // Disable table creation if missing
+			pruneSessionInterval: 60 * 60 * 24 * 7, // prune expired sessions every 7 days
     }),
   });
 

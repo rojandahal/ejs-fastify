@@ -1,0 +1,57 @@
+<div class="form_register">
+	<form class="w-50 g-3 needs-validation" novalidate="" action="/api/v1/signup" method="post">
+		<h2 class="mb-4">Create new user</h2>
+		<div class="mb-3">
+			<label for="inputEmail" class="form-label">Email address</label>
+			<input type="email" class="form-control w-75" name="email" id="email" aria-describedby="emailHelp" required />
+			<div id="emailHelp" class="form-text">
+				We'll never share your email with anyone else.
+			</div>
+			<div class="invalid-feedback">Please provide an email .</div>
+		</div>
+		<div class="mb-3">
+			<label for="inputUsername" class="form-label">Username</label>
+			<input type="text" class="form-control w-75" id="username" name="username" minlength="3"
+				aria-describedby="emailHelp" required />
+			<div class="invalid-feedback">
+				Please provide a username with at least 3 character .
+			</div>
+		</div>
+		<div class="mb-3">
+			<label for="inputPassword" class="form-label">Password</label>
+			<input type="password" class="form-control w-75" name="password" id="inputPassword" required minlength="8" />
+			<div class="invalid-feedback">
+				Please provide a password with at least 8 character.
+			</div>
+		</div>
+
+		<button type="submit" class="btn btn-dark">Submit</button>
+		<div>
+			<span>Are you a user ?</span>
+			<a href="/api/v1/login" class="text-success fw-bold text-decoration-underline">Login</a>
+		</div>
+		<div class="google-login mt-4">
+			<a href="/api/v1/auth/google" class="btn btn-outline-danger">
+				<img src=" /public/svg/icons8-google.svg" alt="icon" style="width: 25px;">
+				<span>Signup with Google</span>
+			</a>
+		</div>
+		<p class="text-danger fw-semibold">
+			<%= message %>
+		</p>
+	</form>
+</div>
+
+<script>
+	// Add event listener for form submission
+	document
+		.querySelector('.form_register form')
+		.addEventListener('submit', function (event) {
+			if (!event.target.checkValidity()) {
+				event.preventDefault(); // Prevent form submission if it's invalid
+				event.stopPropagation();
+			}
+
+			event.target.classList.add('was-validated');
+		});
+</script>

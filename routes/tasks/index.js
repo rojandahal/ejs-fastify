@@ -4,22 +4,25 @@ const {
   getTask,
   setTasks,
   updateTasks,
+  deleteTask,
 } = require('../../controller/handler/tasksHandler');
 
 module.exports = async function (fastify, opts) {
   fastify.get('/', {
-    onRequest: fastify.csrfProtection,
-    preValidation: fastify.authenticate,
+    preValidation: fastify.isLoggedIn,
     handler: getTask,
   });
 
   fastify.post('/', {
-    preValidation: fastify.authenticate,
     handler: setTasks,
   });
 
-  fastify.put('/', {
-    preValidation: fastify.authenticate,
+  fastify.post('/update', {
     handler: updateTasks,
+  });
+
+  fastify.delete('/:id', {
+    preValidation: fastify.isLoggedIn,
+    handler: deleteTask,
   });
 };
