@@ -29,7 +29,6 @@
     "@fastify/view": "^7.4.1",
     "connect-pg-simple": "^8.0.0",
     "ejs": "^3.1.9",
-    "express-openid-connect": "^2.16.0",
     "fastify": "^4.0.0",
     "fastify-cli": "^5.7.1",
     "fastify-plugin": "^4.0.0",
