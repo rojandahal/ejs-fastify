@@ -34,6 +34,8 @@ module.exports = async function (fastify, opts) {
       'http://localhost:5173',
       'http://127.0.0.1:3000',
       'http://localhost:3000',
+      'https://ejs-with-node.onrender.com',
+      'https://ejs-with-node.onrender.com',
       'https://accounts.google.com',
     ],
     methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
