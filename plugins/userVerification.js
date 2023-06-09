@@ -10,11 +10,15 @@ const userVerification = async function (fastify, opts) {
       reply.locals.loggedIn = false;
       return;
     }
-
+    const username = await req.server.user.findOne({
+      where: { id: req.session.user },
+    });
     if (req.url === '/api/v1/tasks') {
+      reply.locals.username = username.dataValues.username;
       reply.locals.loggedIn = true;
       return;
     }
+    reply.locals.username = username.dataValues.username;
     reply.locals.loggedIn = true;
     reply.redirect('/api/v1/tasks');
     return;

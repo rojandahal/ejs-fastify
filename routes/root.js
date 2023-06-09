@@ -5,6 +5,7 @@ module.exports = async function (fastify, opts) {
       await reply.view('/index.ejs', {
         tab: 'Home',
         title: 'Task Manager',
+        username: req.session.user ? req.session.username : '',
         loggedIn: req.session.user ? true : false,
       });
     },
@@ -33,7 +34,7 @@ module.exports = async function (fastify, opts) {
           });
         req.session.user = temp.userId;
         req.session.token = result;
-        reply.redirect('http://localhost:5173');
+        reply.redirect('http://localhost:3000/api/v1/tasks');
         // reply.redirect(
         //   `${process.env.baseURL}${process.env.API_VERSION}/users`,
         // );
