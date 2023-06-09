@@ -5,7 +5,13 @@ const TaskModel = require('../model/tasks');
 const dbConnection = async (fastify, options) => {
   try {
     // Create a new Sequelize instance
-    const sequelize = new Sequelize(process.env.DB_CONNECTION_STRING);
+    const sequelize = new Sequelize(process.env.DB_CONNECTION_STRING, {
+      pool: {
+        max: 5,
+        min: 0,
+        idle: 10000,
+      },
+    });
 
     // Test the database connection
     await sequelize.authenticate();

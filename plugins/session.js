@@ -10,6 +10,7 @@ const sessionConnect = async (fastify, opts) => {
   // });
   const pool = new Pool({
     connectionString: process.env.DB_CONNECTION_STRING,
+    idleTimeoutMillis: 10000,
   });
 
   fastify.register(session, {
