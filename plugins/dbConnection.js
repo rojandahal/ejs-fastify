@@ -5,9 +5,7 @@ const TaskModel = require('../model/tasks');
 const dbConnection = async (fastify, options) => {
   try {
     // Create a new Sequelize instance
-    const sequelize = new Sequelize(
-      'postgres://postgres:toti2king@localhost/postgres',
-    );
+    const sequelize = new Sequelize(process.env.DB_CONNECTION_STRING);
 
     // Test the database connection
     await sequelize.authenticate();

@@ -5,8 +5,11 @@ const { Pool } = require('pg');
 
 const sessionConnect = async (fastify, opts) => {
   //Register session plugin
+  // const pool = new Pool({
+  //   connectionString: process.env.DB_CONNECTION_STRING, // Replace with your PostgreSQL connection details
+  // });
   const pool = new Pool({
-    connectionString: 'postgres://postgres:toti2king@localhost/postgres', // Replace with your PostgreSQL connection details
+    connectionString: process.env.DB_CONNECTION_STRING,
   });
 
   fastify.register(session, {
