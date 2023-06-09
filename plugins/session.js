@@ -10,7 +10,10 @@ const sessionConnect = async (fastify, opts) => {
   // });
   const pool = new Pool({
     connectionString: process.env.DB_CONNECTION_STRING,
-    idleTimeoutMillis: 10000,
+		ssl: {
+			rejectUnauthorized: false,
+		},
+		
   });
 
   fastify.register(session, {
@@ -26,7 +29,8 @@ const sessionConnect = async (fastify, opts) => {
     store: new pgSession({
       pool,
       tableName: 'sessions', // Name of the session table in the database
-      createTableIfMissing: false, // Disable table creation if missing
+      createTableIfMissing: true, // Disable table creation if missing
+			pruneSessionInterval: 60 * 60 * 24 * 7, // prune expired sessions every 7 days
     }),
   });
 

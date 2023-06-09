@@ -6,10 +6,14 @@ const dbConnection = async (fastify, options) => {
   try {
     // Create a new Sequelize instance
     const sequelize = new Sequelize(process.env.DB_CONNECTION_STRING, {
-      pool: {
-        max: 5,
-        min: 0,
-        idle: 10000,
+      dialect: 'postgres',
+      protocol: 'postgres',
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false,
+        },
+        IdleDeadlineMillis: 5000,
       },
     });
 
