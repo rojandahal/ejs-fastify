@@ -7,6 +7,18 @@ const setTasks = async (req, reply) => {
   const userId = req.session.user;
   const user = { ...taskDetails, user: userId };
   const task = await req.server.task.create(user);
+  const users = await req.server.user.findAll();
+  const userDetail = await req.server.user.findOne({ where: { id: userId } });
+  const username = userDetail.dataValues.username;
+
+  users.map(async (user) => {
+    console.log(user.dataValues.email);
+    await req.server.sendEmail(
+      user.dataValues.email,
+      'New Task',
+      `"${username}" has added a new task "${taskDetails.title}"`,
+    );
+  });
   await reply.redirect('/api/v1/tasks');
 };
 

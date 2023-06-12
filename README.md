@@ -1,7 +1,13 @@
 # Node-Fastify API with postgres
 This project was bootstrapped with Fastify-CLI.
 
-Clone this repo using:  
+# Deployment
+The website is deployed in Render at: https://ejs-with-node.onrender.com/api/v1/ 
+This project is clone of another repo rojandahal/node-fastify-postgres with additional feature which includes the dynamic template using ejs.
+It provide server side rendering with ejs templating engine. 
+
+
+### Clone this repo using:  
 `git clone https://github.com/rojandahal/node-fastify-postgres.git`
 
 ### Different feature implementation in Branch
